@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Statistics } from './Section/Statistics/Statistics.jsx';
-// import { FeedbackOptions } from './Section/FeedbackOptions/FeedbackOptions.jsx';
+import { FeedbackOptions } from './Section/FeedbackOptions/FeedbackOptions.jsx';
 import { Notification } from './Section/Notification/Notification.jsx';
 import { Section } from './Section/Section.jsx';
 
@@ -11,19 +11,9 @@ export class App extends Component {
     bad: 0,
   };
 
-  handleStateGood = () => {
+  onLeaveFeedback = state => {
     this.setState(prevState => ({
-      good: prevState.good + 1,
-    }));
-  };
-  handleStateNeutral = () => {
-    this.setState(prevState => ({
-      neutral: prevState.neutral + 1,
-    }));
-  };
-  handleStateBad = () => {
-    this.setState(prevState => ({
-      bad: prevState.bad + 1,
+      [state]: prevState[state] + 1,
     }));
   };
 
@@ -35,20 +25,13 @@ export class App extends Component {
   };
 
   render() {
+    const options = Object.keys(this.state);
+
     return (
       <div>
-        <h1>Please leave feedback</h1>
         <Section title="Please leave feedback">
-          {/* <FeedbackOptions options={} onLeaveFeedback={} /> */}
-          <button type="button" onClick={this.handleStateGood}>
-            Good
-          </button>
-          <button type="button" onClick={this.handleStateNeutral}>
-            Neutral
-          </button>
-          <button type="button" onClick={this.handleStateBad}>
-            Bad
-          </button>
+          <FeedbackOptions  options={options}
+            onLeaveFeedback={this.onLeaveFeedback} />
         </Section>
         <Section title="Statistics">
           {this.countTotalFeedback() === 0 ? (
