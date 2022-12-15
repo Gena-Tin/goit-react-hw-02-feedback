@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import css from './App.module.css';
 import { Statistics } from './Section/Statistics/Statistics.jsx';
 import { FeedbackOptions } from './Section/FeedbackOptions/FeedbackOptions.jsx';
 import { Notification } from './Section/Notification/Notification.jsx';
@@ -28,7 +29,7 @@ export class App extends Component {
     const options = Object.keys(this.state);
 
     return (
-      <div>
+      <div className={css.feedbackSection}>
         <Section title="Please leave feedback">
           <FeedbackOptions  options={options}
             onLeaveFeedback={this.onLeaveFeedback} />
